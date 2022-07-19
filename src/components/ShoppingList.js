@@ -6,6 +6,16 @@ import Item from "./Item";
 function ShoppingList() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [items, setItems] = useState([]);
+  
+
+  useEffect(() => {
+    fetch("http://localhost:4000/items")
+      .then((r) => r.json())
+      .then((items) => setItems(items));
+  }, []);
+  function handleAddItem(newItem) {
+    setItems([...items, newItem]);
+  }
 
   function handleCategoryChange(category) {
     setSelectedCategory(category);
